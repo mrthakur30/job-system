@@ -14,6 +14,8 @@ import com.example.job_system.dto.CreateJobRequest;
 import com.example.job_system.entity.Job;
 import com.example.job_system.service.JobService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/jobs")
 public class JobController {
@@ -24,7 +26,7 @@ public class JobController {
    }
 
    @PostMapping
-   public Job createJob(@RequestBody CreateJobRequest request){
+   public Job createJob(@Valid @RequestBody CreateJobRequest request){
     return jobService.createJob(request.getType());
    }
 
