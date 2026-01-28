@@ -17,8 +17,8 @@ public class JobService {
           this.jobRepository = jobRepository;
     }
 
-    public Job createJob(){
-        Job job = new Job("REPORT","PENDING");
+    public Job createJob(String type){
+        Job job = new Job(type,"PENDING");
         return jobRepository.save(job);
     }
 
