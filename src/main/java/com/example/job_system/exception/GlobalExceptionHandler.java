@@ -47,4 +47,19 @@ public class GlobalExceptionHandler {
     
         return ResponseEntity.badRequest().body(body);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, Object>> handleIllegalArgument(
+            IllegalArgumentException ex,
+            HttpServletRequest request) {
+    
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", Instant.now());
+        body.put("status", 400);
+        body.put("error", "Bad Request");
+        body.put("message", "Invalid job type");
+        body.put("path", request.getRequestURI());
+    
+        return ResponseEntity.badRequest().body(body);
+    }
 }

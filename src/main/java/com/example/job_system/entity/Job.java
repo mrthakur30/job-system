@@ -3,7 +3,12 @@ package com.example.job_system.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.example.job_system.enums.JobStatus;
+import com.example.job_system.enums.JobType;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -16,15 +21,19 @@ public class Job {
     @GeneratedValue
     private UUID id;
 
-    private String type;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private JobType type;
+
+    @Enumerated(EnumType.STRING)
+    private JobStatus status;
+
     private LocalDateTime createdAt;
 
     protected Job() {
         // JPA only
     }
 
-    public Job(String type, String status){
+    public Job(JobType type, JobStatus status) {
         this.type = type;
         this.status = status;
         this.createdAt = LocalDateTime.now();
@@ -34,11 +43,11 @@ public class Job {
         return id;
     }
 
-    public String getType() {
+    public JobType getType() {
         return type;
     }
 
-    public String getStatus() {
+    public JobStatus getStatus() {
         return status;
     }
 
