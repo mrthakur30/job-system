@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.example.job_system.enums.JobStatus;
 import com.example.job_system.enums.JobType;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,6 +29,9 @@ public class Job {
     private JobStatus status;
 
     private LocalDateTime createdAt;
+    
+    @Column(nullable = false)
+    private int retryCount = 0 ;
 
     protected Job() {
         // JPA only
@@ -37,6 +41,7 @@ public class Job {
         this.type = type;
         this.status = status;
         this.createdAt = LocalDateTime.now();
+        this.retryCount = 0 ;
     }
 
      public UUID getId() {
@@ -51,8 +56,20 @@ public class Job {
         return status;
     }
 
+    public void setStatus(JobStatus status) {
+        this.status = status;
+    }
+
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public int getRetryCount() { 
+        return retryCount; 
+    }
+
+    public void setRetryCount(int retryCount) {
+         this.retryCount = retryCount; 
+    }
 }
